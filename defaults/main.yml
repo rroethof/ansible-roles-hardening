@@ -1,0 +1,223 @@
+---
+# defaults file for hardening
+
+#########################
+# System banner message #
+#########################
+
+### Primary source for this setting comes from the CIS benchmark
+# Controlling the setting for the banner messages is specifically separated as it depends on the preferences of each environment standards.
+banner_msg: |
+              Unauthorized access to this machine is prohibited.
+              All activities are monitored and will be reported.
+              Log out if you are not an authorized user.
+
+############
+# Modprobe #
+############
+
+### This section contains variable values for enabling or disabling unused file systems.
+### Primary source for these settings come from the CIS benchmark and Lynis benchmark
+#
+#   To enable use => true, else use => false
+#   To make persistent use => true, else use => false
+#
+#   The result renders in a file on a remote system: "/etc/modprobe.d/modprobe_persistent_disable.conf" | Persistent disable
+#   The result renders in a file on a remote system: "/etc/modules-load.d/modprobe_persistent_enable.conf" | Persistent enable
+#
+
+modprobe_modules:
+  - name: "cramfs"
+    state: false
+    persistent: true
+  - name: "freevxfs"
+    state: false
+    persistent: true
+  - name: "jffs2"
+    state: false
+    persistent: true
+  - name: "hfs"
+    state: false
+    persistent: true
+  - name: "hfsplus"
+    state: false
+    persistent: true
+  - name: "squashfs"
+    state: false
+    persistent: true
+  - name: "udf"
+    state: false
+    persistent: true
+  - name: "vfat"
+    state: fals
+    persistent: true
+  - name: "dccp"
+    state: false
+    persistent: true
+  - name: "sctp"
+    state: false
+    persistent: true
+  - name: "rds"
+    state: false
+    persistent: true
+  - name: "tipc"
+    state: false
+    persistent: true
+  - name: "usb-storage"
+    state: false
+    persistent: true
+  - name: "firewire-core"
+    state: false
+    persistent: true
+
+############
+# Services #
+############
+### This section contains variable values for enabling or disabling services.
+### Primary source for these settings come from the CIS benchmarkand Lynis benchmark
+#
+# Service states values: "started", "stopped", "restarted", "reloaded"
+# Service enabled values: "yes", "no"
+# Service name values should point to the service name (this may differ from package name)
+# Service package values should point to the package that provides the service (this may differ from service name)
+#
+### CIS mentions a list of services.
+### For the default within Trusted Services many services have been commented out, use only when needed.
+
+services:
+  # - name: "httpd"
+  #   package: "httpd"
+  #   state: "stopped"
+  #   enabled: "no"
+  #   masked: "yes"
+  # - name: "squid"
+  #   package: "squid"
+  #   state: "stopped"
+  #   enabled: "no"
+  #   masked: "yes"
+  - name: "snmpd"
+    package: "net-snmp"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  # - name: "slapd"
+  #   package: "openldap-servers"
+  #   state: "stopped"
+  #   enabled: "no"
+  #   masked: "yes"
+  - name: "smb"
+    package: "samba"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "nmb"
+    package: "samba"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "xinetd"
+    package: "xinetd"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "dhcp"
+    package: "dhcp"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  # - name: "named"
+  #   package: "bind"
+  #   state: "stopped"
+  #   enabled: "no"
+  #   masked: "yes"
+  # - name: "nfs"
+  #   package: "nfs-utils"
+  #   state: "stopped"
+  #   enabled: "no"
+  #   masked: "yes"
+  # - name: "nfs-server"
+  #   package: "nfs-utils"
+  #   state: "stopped"
+  #   enabled: "no"
+  #   masked: "yes"
+  - name: "rpcbind"
+    package: "rpcbind"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "autofs"
+    package: "autofs"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  # - name: "vsftpd"
+  #   package: "vsftpd"
+  #    state: "stopped"
+  #    enabled: "no"
+  #    masked: "yes"
+  # - name: "dovecot"
+  #   package: "dovecot"
+  #   state: "stopped"
+  #   enabled: "no"
+  #   masked: "yes"
+  - name: "avahi-daemon"
+    package: "avahi"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "cups"
+    package: "cups"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "ypserv"
+    package: "ypserv"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "rsh.socket"
+    package: "rsh-server"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "rlogin.socket"
+    package: "rsh-server"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "rexec.socket"
+    package: "rsh-server"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "ntalk"
+    package: "talk-server"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "telnet.socket"
+    package: "telnet-server"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "tftp.socket"
+    package: "tftp-server"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "rsyncd"
+    package: "rsync"
+    state: "stopped"
+    enabled: "no"
+    masked: "yes"
+  - name: "psacct"
+    package: "psacct"
+    state: "started"
+    enabled: "yes"
+    masked: "no"
+  - name: "arpwatch"
+    package: "arpwatch"
+    state: "started"
+    enabled: "yes"
+    masked: "no"
+
